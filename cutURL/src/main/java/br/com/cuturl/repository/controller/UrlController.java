@@ -56,15 +56,5 @@ public class UrlController {
 		return ResponseEntity.status(201).body(urlService.save(newUrl));
 	}
 	
-	/*
-	@GetMapping("count")
-	public ResponseEntity<Object> count() {
-		Optional<Long> objectCount = Optional.of(urlRep.count());
-		
-		
-		return ResponseEntity.status(200).body(objectCount);
-		
-	}*/
-	
 	
 }

@@ -13,23 +13,18 @@ import br.com.cuturl.model.Url;
 public interface UrlRepository extends JpaRepository<Url, Long>{
 	
 	default Optional<String> generateCutUrl(Long totalIds) {
-		
 		char[] url = {' ', ' ', ' ', ' ', ' '};
 		
-		// String id
 		String stringId = "00"+totalIds;
 		stringId = stringId.substring(stringId.length() -3);
 		url[0] = stringId.charAt(1);
 		url[1]= stringId.charAt(2);
 		
-		
-		// date
 		Date date = new Date();
 		String stringDate = date.toString();
 		url[2] = stringDate.charAt(0);
 		url[3] = stringDate.substring(stringDate.length() - 2).charAt(0);
-		
-		// random letter
+
 		char randomLetter = ' ';
 		Random r = new Random();
 		String alphaNum = "abcdefghijklopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+-";
@@ -37,8 +32,7 @@ public interface UrlRepository extends JpaRepository<Url, Long>{
 			randomLetter = alphaNum.charAt(r.nextInt(alphaNum.length()));
 		}
 		url[4] = randomLetter;
-		
-		// url
+
 		for (int i = 4; i > 0; i--) {
 			int j = r.nextInt(i+1);
 			
@@ -58,15 +52,12 @@ public interface UrlRepository extends JpaRepository<Url, Long>{
 	}
 	
 	default Optional<String> generateShortenedUrl(String originalUrl, String cutUrl) {
-		
 		String shortenedUrl = "";
 		if(originalUrl.charAt(originalUrl.length() -1) == '/' ) {
 			shortenedUrl = originalUrl + cutUrl;
 		} else {
 			shortenedUrl = originalUrl + "/" + cutUrl;
 		}
-		
-		 
 		
 		return Optional.of(shortenedUrl);
 	}
