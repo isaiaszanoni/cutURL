@@ -12,7 +12,7 @@ import br.com.cuturl.model.Url;
 
 public interface UrlRepository extends JpaRepository<Url, Long>{
 	
-	default Optional<String> getCutUrl(Long totalIds) {
+	default Optional<String> generateCutUrl(Long totalIds) {
 		
 		char[] url = {' ', ' ', ' ', ' ', ' '};
 		
@@ -55,6 +55,13 @@ public interface UrlRepository extends JpaRepository<Url, Long>{
 		
 		return Optional.of(cutUrl);
 		
+	}
+	
+	default Optional<String> generateShortenedUrl(String originalUrl, String cutUrl) {
+		
+		String shortenedUrl = originalUrl + cutUrl;
+		
+		return Optional.of(shortenedUrl);
 	}
 	
 
