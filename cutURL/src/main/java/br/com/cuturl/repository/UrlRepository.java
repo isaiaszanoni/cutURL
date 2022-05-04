@@ -12,22 +12,22 @@ import br.com.cuturl.model.Url;
 
 public interface UrlRepository extends JpaRepository<Url, Long>{
 	
-	default Optional<String> getCutUrl(Long totalIds ) {
-		// Vai retornar uma String, na real
+	default Optional<String> getCutUrl(Long totalIds) {
 		
 		char[] url = {' ', ' ', ' ', ' ', ' '};
 		
 		// String id
-		String stringId = totalIds.toString();
-		stringId = "0"+stringId.substring(stringId.length() -2);
+		String stringId = "00"+totalIds;
+		stringId = stringId.substring(stringId.length() -3);
 		url[0] = stringId.charAt(1);
-		url[1] = stringId.charAt(2);
+		url[1]= stringId.charAt(2);
+		
 		
 		// date
 		Date date = new Date();
 		String stringDate = date.toString();
 		url[2] = stringDate.charAt(0);
-		url[3] = stringDate.substring(stringDate.length() - 1).charAt(0);
+		url[3] = stringDate.substring(stringDate.length() - 2).charAt(0);
 		
 		// random letter
 		char randomLetter = ' ';

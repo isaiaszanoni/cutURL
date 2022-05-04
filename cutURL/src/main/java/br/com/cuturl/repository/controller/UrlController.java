@@ -48,7 +48,6 @@ public class UrlController {
 		
 		String cutUrl = urlRep.getCutUrl(totalIds.get()).get();
 		
-		
 		newUrl.setCutUrl(cutUrl.toString());
 		
 		
