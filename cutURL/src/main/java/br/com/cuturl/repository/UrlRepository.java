@@ -59,7 +59,14 @@ public interface UrlRepository extends JpaRepository<Url, Long>{
 	
 	default Optional<String> generateShortenedUrl(String originalUrl, String cutUrl) {
 		
-		String shortenedUrl = originalUrl + cutUrl;
+		String shortenedUrl = "";
+		if(originalUrl.charAt(originalUrl.length() -1) == '/' ) {
+			shortenedUrl = originalUrl + cutUrl;
+		} else {
+			shortenedUrl = originalUrl + "/" + cutUrl;
+		}
+		
+		 
 		
 		return Optional.of(shortenedUrl);
 	}

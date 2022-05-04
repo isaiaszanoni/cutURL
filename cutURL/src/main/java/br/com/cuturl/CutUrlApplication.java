@@ -11,7 +11,6 @@ public class CutUrlApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(CutUrlApplication.class, args);
 		
-		
 	}
 
 }
