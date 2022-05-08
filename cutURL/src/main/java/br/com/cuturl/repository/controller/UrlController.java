@@ -49,9 +49,10 @@ public class UrlController {
 		String cutUrl = urlRep.generateCutUrl(totalIds.get()).get();
 		newUrl.setCutUrl(cutUrl.toString());
 		
-		//newUrl.setShortenedUrl(newUrl.getOriginalUrl().toString() + "/"+cutUrl.toString());
 		Optional<String> shortenedUrl = urlRep.generateShortenedUrl(newUrl.getOriginalUrl().toString(), cutUrl.toString());
 		newUrl.setShortenedUrl(shortenedUrl.get().toString());
+		
+		newUrl.setDate(urlRep.generateCutUrlDate());
 		
 		return ResponseEntity.status(201).body(urlService.save(newUrl));
 	}

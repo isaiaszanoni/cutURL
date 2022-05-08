@@ -1,5 +1,8 @@
 package br.com.cuturl.repository;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -12,6 +15,14 @@ import br.com.cuturl.model.Url;
 
 public interface UrlRepository extends JpaRepository<Url, Long>{
 	
+	default Long generateCutUrlDate() {
+		
+		LocalDateTime date = LocalDateTime.now();
+		Long longDate = Long.parseLong(DateTimeFormatter.ofPattern("YYYYMMddhhmm").format(date).toString());
+		
+		return longDate;
+	}
+	
 	default Optional<String> generateCutUrl(Long totalIds) {
 		char[] url = {' ', ' ', ' ', ' ', ' '};
 		
@@ -20,10 +31,11 @@ public interface UrlRepository extends JpaRepository<Url, Long>{
 		url[0] = stringId.charAt(1);
 		url[1]= stringId.charAt(2);
 		
-		Date date = new Date();
+		//Date date = new Date();
+		Long date = generateCutUrlDate();
 		String stringDate = date.toString();
-		url[2] = stringDate.charAt(0);
-		url[3] = stringDate.substring(stringDate.length() - 2).charAt(0);
+		url[2] = stringDate.charAt(3);
+		url[3] = stringDate.charAt(7); //20220507
 
 		char randomLetter = ' ';
 		Random r = new Random();
@@ -61,6 +73,9 @@ public interface UrlRepository extends JpaRepository<Url, Long>{
 		
 		return Optional.of(shortenedUrl);
 	}
+	
+	
+	
 	
 
 }
